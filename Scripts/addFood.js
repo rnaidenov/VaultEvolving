@@ -38,85 +38,85 @@ module.exports = async (params) => {
     // Helper function to generate the dataviewjs code
     const addDataviewJS = (dateStr) => {
         return `\`\`\`dataviewjs
-                    (() => {
-                    // Get current page and nutrition goals
-                    const page = dv.current();
-                    const goals = dv.page("Nutrition Goals");
+(() => {
+// Get current page and nutrition goals
+const page = dv.current();
+const goals = dv.page("Nutrition Goals");
 
-                    if (!page.items) {
-                        dv.paragraph("No food items logged today");
-                        return;
-                    }
+if (!page.items) {
+    dv.paragraph("No food items logged today");
+    return;
+}
 
-                    // Helper function for progress bars
-                    function createProgressBar(current, max, color = "#4CAF50") {
-                        const percentage = max ? Math.min(100, (current / max) * 100) : 0;
-                        return \`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-                            <div style="flex:1;background:#eee;height:12px;border-radius:6px;overflow:hidden">
-                                <div style="width:\${percentage}%;background:\${color};height:100%"></div>
-                            </div>
-                            <span style="min-width:100px;text-align:right">\${current.toFixed(1)} / \${max || 'N/A'}</span>
-                        </div>\`;
-                    }
+// Helper function for progress bars
+function createProgressBar(current, max, color = "#4CAF50") {
+    const percentage = max ? Math.min(100, (current / max) * 100) : 0;
+    return \`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+        <div style="flex:1;background:#eee;height:12px;border-radius:6px;overflow:hidden">
+            <div style="width:\${percentage}%;background:\${color};height:100%"></div>
+        </div>
+        <span style="min-width:100px;text-align:right">\${current.toFixed(1)} / \${max || 'N/A'}</span>
+    </div>\`;
+}
 
-                    // Helper function for food item display
-                    function createFoodItem(item) {
-                        const formattedQuantity = item.quantity;
-                        return \`<div style="display:flex;justify-content:space-between;padding:8px;margin:4px 0;background:#f5f5f5;border-radius:4px">
-                            <div style="flex:1">
-                                <strong>\${item.food}</strong>
-                                <div style="color:#666;font-size:0.9em">\${formattedQuantity}</div>
-                            </div>
-                            <div style="display:flex;gap:16px;color:#666;font-size:0.9em">
-                                <div>🔥 \${item.calories}</div>
-                                <div>🥩 \${item.protein}g</div>
-                                <div>🍚 \${item.carbs}g</div>
-                                <div>🥑 \${item.fat}g</div>
-                            </div>
-                        </div>\`;
-                    }
+// Helper function for food item display
+function createFoodItem(item) {
+    const formattedQuantity = item.quantity;
+    return \`<div style="display:flex;justify-content:space-between;padding:8px;margin:4px 0;background:#f5f5f5;border-radius:4px">
+        <div style="flex:1">
+            <strong>\${item.food}</strong>
+            <div style="color:#666;font-size:0.9em">\${formattedQuantity}</div>
+        </div>
+        <div style="display:flex;gap:16px;color:#666;font-size:0.9em">
+            <div>🔥 \${item.calories}</div>
+            <div>🥩 \${item.protein}g</div>
+            <div>🍚 \${item.carbs}g</div>
+            <div>🥑 \${item.fat}g</div>
+        </div>
+    </div>\`;
+}
 
-                    // Calculate totals
-                    const totals = page.items.reduce((acc, item) => ({
-                        calories: acc.calories + (item.calories || 0),
-                        protein: acc.protein + (item.protein || 0),
-                        carbs: acc.carbs + (item.carbs || 0),
-                        fat: acc.fat + (item.fat || 0)
-                    }), { calories: 0, protein: 0, carbs: 0, fat: 0 });
+// Calculate totals
+const totals = page.items.reduce((acc, item) => ({
+    calories: acc.calories + (item.calories || 0),
+    protein: acc.protein + (item.protein || 0),
+    carbs: acc.carbs + (item.carbs || 0),
+    fat: acc.fat + (item.fat || 0)
+}), { calories: 0, protein: 0, carbs: 0, fat: 0 });
 
-                    dv.header(1, "Food Log ${dateStr}");
+dv.header(1, "Food Log ${dateStr}");
 
-                    // Display food items
-                    dv.header(2, "Today's Meals");
-                    for (const item of page.items) {
-                        dv.paragraph(createFoodItem(item));
-                    }
+// Display food items
+dv.header(2, "Today's Meals");
+for (const item of page.items) {
+    dv.paragraph(createFoodItem(item));
+}
 
-                    // Display progress
-                    dv.header(2, "Nutrition Progress");
-                    const progressHtml = \`
-                    <div style="padding:12px;background:#fff;border-radius:8px;margin:12px 0;">
-                        <div style="margin-bottom:16px;">
-                            <div style="color:#666;margin-bottom:4px">Calories</div>
-                            \${createProgressBar(totals.calories, goals?.calories, "#FF9800")}
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <div style="color:#666;margin-bottom:4px">Protein (g)</div>
-                            \${createProgressBar(totals.protein, goals?.protein, "#4CAF50")}
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <div style="color:#666;margin-bottom:4px">Carbs (g)</div>
-                            \${createProgressBar(totals.carbs, goals?.carbs, "#2196F3")}
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <div style="color:#666;margin-bottom:4px">Fat (g)</div>
-                            \${createProgressBar(totals.fat, goals?.fat, "#F44336")}
-                        </div>
-                    </div>\`;
+// Display progress
+dv.header(2, "Nutrition Progress");
+const progressHtml = \`
+<div style="padding:12px;background:#fff;border-radius:8px;margin:12px 0;">
+    <div style="margin-bottom:16px;">
+        <div style="color:#666;margin-bottom:4px">Calories</div>
+        \${createProgressBar(totals.calories, goals?.calories, "#FF9800")}
+    </div>
+    <div style="margin-bottom:16px;">
+        <div style="color:#666;margin-bottom:4px">Protein (g)</div>
+        \${createProgressBar(totals.protein, goals?.protein, "#4CAF50")}
+    </div>
+    <div style="margin-bottom:16px;">
+        <div style="color:#666;margin-bottom:4px">Carbs (g)</div>
+        \${createProgressBar(totals.carbs, goals?.carbs, "#2196F3")}
+    </div>
+    <div style="margin-bottom:16px;">
+        <div style="color:#666;margin-bottom:4px">Fat (g)</div>
+        \${createProgressBar(totals.fat, goals?.fat, "#F44336")}
+    </div>
+</div>\`;
 
-                    dv.paragraph(progressHtml);
-                    })();
-                \`\`\``;
+dv.paragraph(progressHtml);
+})();
+\`\`\``;
     };
 
     // Helper function to parse macro values from Claude's response
@@ -212,11 +212,11 @@ module.exports = async (params) => {
 
         // Generate new frontmatter string with dataviewjs
         const newContent = `---
-        items:
-        ${items.map(formatItemForYaml).join('\n')}
-        ---
+items:
+${items.map(formatItemForYaml).join('\n')}
+---
 
-        ${addDataviewJS(dateStr)}`;
+${addDataviewJS(dateStr)}`;
 
         // Replace existing content or return new content
         if (fmMatch) {
@@ -290,59 +290,59 @@ module.exports = async (params) => {
                     role: 'system',
                     content: `You are a precise macro calculator that validates nutritional information through web searches.
 
-                HANDLING COMBINED IMAGE AND TEXT:
-                When both image and text are provided:
-                1. First identify the food item(s) from the image
-                2. Use the text input to determine exact quantities or portions
-                3. Example scenarios:
-                - Image: chocolate bar + Text: "4 squares" → Calculate for exactly 4 squares
-                - Image: plate of pasta + Text: "half portion" → Calculate for half of what you see
-                - Image: mixed nuts + Text: "30g" → Use the specified 30g measurement
-                4. Always use the text input as the primary source for quantity/portion size
+HANDLING COMBINED IMAGE AND TEXT:
+When both image and text are provided:
+1. First identify the food item(s) from the image
+2. Use the text input to determine exact quantities or portions
+3. Example scenarios:
+   - Image: chocolate bar + Text: "4 squares" → Calculate for exactly 4 squares
+   - Image: plate of pasta + Text: "half portion" → Calculate for half of what you see
+   - Image: mixed nuts + Text: "30g" → Use the specified 30g measurement
+4. Always use the text input as the primary source for quantity/portion size
 
-                For IMAGES ONLY (no text):
-                1. Describe what you see in detail (type of food, apparent serving size)
-                2. Estimate quantities using standard serving sizes
-                3. Note any assumptions about portions
+For IMAGES ONLY (no text):
+1. Describe what you see in detail (type of food, apparent serving size)
+2. Estimate quantities using standard serving sizes
+3. Note any assumptions about portions
 
-                For TEXT ONLY (no image):
-                1. Parse each item separately (split by commas, newlines, "and", or context)
-                2. Extract both quantity and food name
-                3. If quantity is missing, use standard serving size
+For TEXT ONLY (no image):
+1. Parse each item separately (split by commas, newlines, "and", or context)
+2. Extract both quantity and food name
+3. If quantity is missing, use standard serving size
 
-                NUTRITIONAL CALCULATIONS:
-                1. First identify the exact food item (brand if visible in image)
-                2. Perform web search to find accurate nutritional data
-                3. For branded items: use official nutritional information
-                4. For generic items: use USDA database
-                5. Scale values based on specified quantity
-                6. Always show calculation method in description
+NUTRITIONAL CALCULATIONS:
+1. First identify the exact food item (brand if visible in image)
+2. Perform web search to find accurate nutritional data
+3. For branded items: use official nutritional information
+4. For generic items: use USDA database
+5. Scale values based on specified quantity
+6. Always show calculation method in description
 
-                ALWAYS:
-                - Convert all measurements to metric (g or ml)
-                - Show your sources and calculations
-                - Explain any assumptions
-                - Use ranges if uncertain (e.g., "estimated 100-120g portion")
+ALWAYS:
+- Convert all measurements to metric (g or ml)
+- Show your sources and calculations
+- Explain any assumptions
+- Use ranges if uncertain (e.g., "estimated 100-120g portion")
 
-                Return your response in this exact format:
-                {
-                    "description": "Detailed description including:
-                    - What you see (for images)
-                    - How text input was applied
-                    - Sources used for nutrition data
-                    - Calculations performed
-                    - Any assumptions made",
-                    "items": [
-                        {
-                            "food": "item name (include brand if known)",
-                            "quantity": "quantity in g or ml",
-                            "calories": number,
-                            "protein": number,
-                            "carbs": number,
-                            "fat": number
-                        }
-                    ]
-                }`
+Return your response in this exact format:
+{
+    "description": "Detailed description including:
+    - What you see (for images)
+    - How text input was applied
+    - Sources used for nutrition data
+    - Calculations performed
+    - Any assumptions made",
+    "items": [
+        {
+            "food": "item name (include brand if known)",
+            "quantity": "quantity in g or ml",
+            "calories": number,
+            "protein": number,
+            "carbs": number,
+            "fat": number
+        }
+    ]
+}`
                 },
                 {
                     role: 'user',
@@ -441,11 +441,11 @@ module.exports = async (params) => {
                     await app.vault.modify(existingFile, updatedContent);
                 } else {
                     const initialContent = `---
-                    items:
-                    ${macros.items ? macros.items.map(formatItemForYaml).join('\n') : ''}
-                    ---
+items:
+${macros.items ? macros.items.map(formatItemForYaml).join('\n') : ''}
+---
 
-                    ${addDataviewJS(dateStr)}`;
+${addDataviewJS(dateStr)}`;
                     await app.vault.create(filePath, initialContent);
                 }
 
