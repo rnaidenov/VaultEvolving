@@ -51,8 +51,9 @@ Here’s the step-by-step flow of the calorie-tracking system:
 
 1. Install the required plugins in Obsidian: ModalForms, QuickAdd, and Dataview.
 2. Set up a ModalForms form for food input 
-3. Configure an `addFood` macro using QuickAdd. Set up the macro to use the `addFood` script you see in the files. 
-4. The rest should be handled by the script - it just needs your input (;
+3. Configure an `addFood` macro using QuickAdd. Set up the macro to use the `addFood` script you see in the files.
+4. Ensure you replace the $OPENROUTER_API_KEY with your own API key. A $5 top-up will last you many requests (;
+5. The rest should be handled by the script - it just needs your input (;
 
 ## Next Steps
 
