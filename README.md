@@ -58,6 +58,7 @@ Here’s the step-by-step flow of the calorie-tracking system:
 ## Next Steps
 
 - [ ] Add remaining calories view
+- [ ] Add already added food items
 
 ## Contributing
 
