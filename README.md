@@ -13,6 +13,11 @@ I’ll update this README and add branches with detailed README for each feature
 
 Follow along on Twitter at [@VaultEvolving](https://twitter.com/VaultEvolving) for updates, or check out my threads to see the process in action!
 
+## Current workflows
+
+- [Calories + Macros tracker 🥗](https://github.com/rnaidenov/VaultEvolving/tree/feat/calories-tracker)
+
+
 ## Why VaultEvolving?
 This is my public evolution hub—a place to share what I’m figuring out with Obsidian, learn from feedback, and grow together. It’s all about the journey, not perfection.
 
