@@ -1,0 +1,35 @@
+{
+  "editorPosition": "right",
+  "attachShortcutToGlobalWindow": false,
+  "globalNamespace": "MF",
+  "formDefinitions": [
+    {
+      "title": "What's cookin'?",
+      "name": "add-food",
+      "fields": [
+        {
+          "name": "snack(s)",
+          "label": "",
+          "description": "",
+          "isRequired": false,
+          "input": {
+            "type": "textarea",
+            "hidden": false
+          }
+        },
+        {
+          "name": "image",
+          "label": "",
+          "description": "",
+          "isRequired": false,
+          "input": {
+            "type": "image",
+            "filenameTemplate": "image-{{datetime}}.png",
+            "saveLocation": "food/log/images"
+          }
+        }
+      ],
+      "version": "1"
+    }
+  ]
+}
