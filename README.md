@@ -16,6 +16,7 @@ Follow along on Twitter at [@VaultEvolving](https://twitter.com/VaultEvolving) f
 ## Current workflows
 
 - [Calories + Macros tracker 🥗](https://github.com/rnaidenov/VaultEvolving/tree/feat/calories-tracker)
+- [Projects / Tasks Manager 📔](https://github.com/rnaidenov/VaultEvolving/tree/feat/project-manager)
 
 
 ## Why VaultEvolving?
