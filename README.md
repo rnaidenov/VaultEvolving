@@ -1,29 +1,39 @@
-# VaultEvolving 🗂️
+# VaultEvolving: Project Management Workflow in Obsidian
 
-Hey there! Welcome to **VaultEvolving**, my space to share the journey of building and growing my Obsidian vault. I’m documenting the systems I create to learn, track, and evolve.
+## Overview
 
-## What’s This About?
-I’m using Obsidian to build personal workflows, like:
-- A calorie-tracking system with ModalForms, QuickAdd, and Google Flash 2.0 to log food and macros.
-- Journals!
-- Project, workout, and habit trackers.
-- Notes, plugins, and live experiments to improve how I learn and grow.
+Welcome to my project management workflow in [Obsidian](https://obsidian.md/). This setup helps keep projects and tasks organized with a system that automates templates, task management, and information consolidation. I'm documenting this journey as @VaultEvolving on [Twitter](https://twitter.com/VaultEvolving).
 
-I’ll update this README and add branches with detailed README for each feature. 
+## What It Does
 
-Follow along on Twitter at [@VaultEvolving](https://twitter.com/VaultEvolving) for updates, or check out my threads to see the process in action!
+This workflow manages projects in Obsidian through:
+- Automated project note creation with templates (using the PARA method)
+- Streamlined task addition via forms with project prefixes
+- Consolidated task views within each project note
 
-## Current workflows
+Here's the workflow:
 
-- [Calories + Macros tracker 🥗](https://github.com/rnaidenov/VaultEvolving/tree/feat/calories-tracker)
+1. **Templater Sets Up Project Notes**  
+   New notes in the `projects` folder are automatically populated with a `Project_template` (PARA method) via [Templater](https://github.com/SilentVoid13/Templater). The template includes frontmatter (start date, status, etc.) and sections for goals, tasks, and more.  
+   <!-- TODO: add screenshot -->
 
+2. **ModalForms for Task Input**  
+   [ModalForms](https://github.com/obsidianmd/obsidian-modal-forms) allows for selecting a project (e.g., "Obsidian") from the `projects` folder and adding tasks efficiently.  
+   <!-- TODO: add screenshot -->
 
-## Why VaultEvolving?
-This is my public evolution hub—a place to share what I’m figuring out with Obsidian, learn from feedback, and grow together. It’s all about the journey, not perfection.
+3. **QuickAdd + Script to Add Tasks**  
+   A [QuickAdd](https://github.com/chhoumann/quickadd) macro (pinned to the Command Palette) executes a custom script that adds tasks to `🏗️ Tasks.md`, prefixed with the project name (e.g., "Obsidian: new tweet…").  
+   <!-- TODO: add screenshot -->
 
-## Get Involved
-- Have ideas or suggestions? Open PRs or tweet me!
-- Want to try it out? Clone this repo and explore the setup.
-- Follow along for more systems, plugins, and notes as I build them.
+4. **Dataview Pulls Tasks into Project Notes**  
+   Each project note uses [Dataview](https://github.com/blacksmithgu/obsidian-dataview) to display all tasks (completed or not) related to the project, creating a centralized view.  
+   <!-- TODO: add screenshot -->
 
-Join the journey! 💪🏻
+## Next Steps
+
+- [ ] Add a way to track time spent on tasks automatically.
+- [ ] Improve task filtering with more Dataview queries.
+
+## Contributing
+
+Feel free to fork this repo, try the workflow, and share your feedback! Open an issue or submit a pull request with improvements.
