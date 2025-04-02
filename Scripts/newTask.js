@@ -6,6 +6,11 @@ module.exports = async (params) => {
     if (result) {
       const project = result['project'].value;
       const task = result['task'].value;
+
+      if (!task) {
+        new Notice('Task cannot be empty');
+        return;
+      }
       
       let output = '';
       if (project) {
